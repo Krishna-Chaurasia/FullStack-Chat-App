@@ -62,6 +62,11 @@ export const sendMessage = async (req, res) => {
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
+    //new added
+    if (!req.params.id) {
+        return res.status(400).json({ error: "Missing parameter: id" });
+      }
+      //new added end
 
         res.status(201).json(newMessage); // send the new message as response
     
